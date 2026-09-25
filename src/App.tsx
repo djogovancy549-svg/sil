@@ -80,7 +80,7 @@ export default function App() {
 
       // 1. Try to fetch live draft topics directly from the Google Sheet via Webhook (GET)
       try {
-        const sheetRes = await fetch(GOOGLE_APPS_SCRIPT_URL);
+        const sheetRes = await fetch(GOOGLE_APPS_SCRIPT_URL + "?api=true");
         if (sheetRes.ok) {
           const sheetData = await sheetRes.json();
           if (sheetData.activeDrafts && sheetData.activeDrafts.length > 0) {
