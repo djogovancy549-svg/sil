@@ -510,7 +510,16 @@ export default function App() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 text-slate-600">
-                      {enactedRegulations.map((law) => (
+                      {enactedRegulations.length === 0 ? (
+                        <tr>
+                          <td colSpan={4} className="py-8 px-4 text-center text-slate-400">
+                            <History className="h-7 w-7 mx-auto text-slate-300 mb-2" />
+                            <p className="font-semibold text-slate-600 text-xs">Belum ada daftar undang-undang referensi di Sheet</p>
+                            <p className="text-[11px] text-slate-400 mt-0.5">Tambahkan baris pada tab sheet 'Peraturan Berlaku' untuk menampilkan undang-undang acuan di sini.</p>
+                          </td>
+                        </tr>
+                      ) : (
+                        enactedRegulations.map((law) => (
                         <tr key={law.id} className="hover:bg-slate-50/50">
                           <td className="py-4 px-4 font-bold text-slate-800 whitespace-nowrap">
                             {law.no}
@@ -532,7 +541,7 @@ export default function App() {
                             </span>
                           </td>
                         </tr>
-                      ))}
+                      )))}
                     </tbody>
                   </table>
                 </div>
