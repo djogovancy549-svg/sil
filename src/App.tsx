@@ -22,7 +22,7 @@ import bgWatermark from './assets/images/legal_green_watermark_1790310008588.jpg
 
 // Hardcoded Google Sheet & Webhook Apps Script URLs embedded directly into the coding
 const GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1CHwIRAvR7M3Sd3TdxgPYBYsdhUUqdGvFs_MzOVaMt3s/edit?usp=sharing";
-const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyVBUlCNuPaFWuq0ntPGryalIgLDCB-4d2nCa0CbAdvcx038nGu_Or2gxsk87yPQ5bl1w/exec";
+const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxjdpnRP594490VM3AofTJPox_v0v8JSJ23P7OxnTV9dQKExvMH-8NqRr0iFLQEs72RDw/exec";
 
 interface ActiveDraft {
   id: string;
