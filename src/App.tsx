@@ -25,7 +25,7 @@ const GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1CHwIRAvR7M3Sd3
 const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyenIk6eCqHe8Q5lupOpFzMPBYYi0BuIctabL9Q034E1cAb70cuvJm3JeKfsLiRwRHwcg/exec";
 
 interface ActiveDraft {
-  id: string;
+  id: string;https://script.google.com/macros/s/AKfycbzZOivTRlr-cnrsLo18i_A8rKzINywqdVaGoTWp1AQwVyGxx2tLnulaHRw7mjIuT2Qw7Q/exec
   no: string;
   title: string;
   desc: string;
