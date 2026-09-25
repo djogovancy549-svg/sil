@@ -1,0 +1,6 @@
+{
+  "name": "Aplikasi Uji Publik Draft Peraturan",
+  "description": "Aplikasi uji publik rancangan / draft peraturan untuk menampung kritik, saran, dan rekomendasi dari masyarakat umum, akademisi, tokoh, dan praktisi dengan batas kuota 100 pengkritik.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
