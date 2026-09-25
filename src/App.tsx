@@ -36,6 +36,7 @@ interface EnactedRegulation {
   title: string;
   year: string;
   desc: string;
+  drivePdfUrl?: string;
   status: string;
 }
 
@@ -506,13 +507,14 @@ export default function App() {
                         <th className="py-3 px-4">No Regulasi</th>
                         <th className="py-3 px-4">Judul Peraturan</th>
                         <th className="py-3 px-4">Tahun Sah</th>
+                        <th className="py-3 px-4 text-center">Naskah PDF</th>
                         <th className="py-3 px-4">Status</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 text-slate-600">
                       {enactedRegulations.length === 0 ? (
                         <tr>
-                          <td colSpan={4} className="py-8 px-4 text-center text-slate-400">
+                          <td colSpan={5} className="py-8 px-4 text-center text-slate-400">
                             <History className="h-7 w-7 mx-auto text-slate-300 mb-2" />
                             <p className="font-semibold text-slate-600 text-xs">Belum ada daftar undang-undang referensi di Sheet</p>
                             <p className="text-[11px] text-slate-400 mt-0.5">Tambahkan baris pada tab sheet 'Peraturan Berlaku' untuk menampilkan undang-undang acuan di sini.</p>
@@ -532,8 +534,23 @@ export default function App() {
                               {law.desc}
                             </span>
                           </td>
-                          <td className="py-4 px-4 font-bold text-slate-700">
+                          <td className="py-4 px-4 font-bold text-slate-700 whitespace-nowrap">
                             {law.year}
+                          </td>
+                          <td className="py-4 px-4 text-center whitespace-nowrap">
+                            {law.drivePdfUrl ? (
+                              <a
+                                href={law.drivePdfUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center space-x-1 py-1 px-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-md font-bold text-[10px] border border-indigo-200 transition-all shadow-3xs"
+                              >
+                                <ExternalLink className="h-3 w-3" />
+                                <span>Buka PDF</span>
+                              </a>
+                            ) : (
+                              <span className="text-slate-300 text-[10px] italic">Tanpa berkas</span>
+                            )}
                           </td>
                           <td className="py-4 px-4 whitespace-nowrap">
                             <span className="bg-emerald-50 border border-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-[10px]">
