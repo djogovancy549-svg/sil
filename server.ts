@@ -77,6 +77,36 @@ async function startServer() {
   // Fetch all regulations (Active Drafts & Enacted ones)
   app.get('/api/regulations', async (req, res) => {
     try {
+      const configData = await fs.readFile(CONFIG_FILE, 'utf-8');
+      const config = JSON.parse(configData);
+
+      if (config.googleSheetAppsScriptUrl) {
+        try {
+          const scriptUrl = config.googleSheetAppsScriptUrl.includes('?') 
+            ? `${config.googleSheetAppsScriptUrl}&api=true` 
+            : `${config.googleSheetAppsScriptUrl}?api=true`;
+          
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 6000);
+
+          const scriptRes = await fetch(scriptUrl, {
+            signal: controller.signal
+          });
+          clearTimeout(timeoutId);
+
+          if (scriptRes.ok) {
+            const liveData = await scriptRes.json();
+            if (liveData && (liveData.activeDrafts || liveData.enactedRegulations)) {
+              // Cache live data to file as well
+              await fs.writeFile(REGULATIONS_FILE, JSON.stringify(liveData, null, 2), 'utf-8');
+              return res.json(liveData);
+            }
+          }
+        } catch (fetchErr: any) {
+          console.warn("Direct Apps Script fetch from server failed, falling back to cached file:", fetchErr.message);
+        }
+      }
+
       const data = await fs.readFile(REGULATIONS_FILE, 'utf-8');
       res.json(JSON.parse(data));
     } catch (error) {

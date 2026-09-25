@@ -78,39 +78,29 @@ export default function App() {
       let fetchedEnacted: EnactedRegulation[] = [];
       let fetchedCount = 0;
 
-      // 1. Try to fetch live draft topics directly from the Google Sheet via Webhook (GET)
+      // 1. Fetch live regulations from server endpoint (which proxies Apps Script without CORS)
       try {
-        const sheetRes = await fetch(GOOGLE_APPS_SCRIPT_URL + "?api=true");
-        if (sheetRes.ok) {
-          const sheetData = await sheetRes.json();
-          if (sheetData.activeDrafts && sheetData.activeDrafts.length > 0) {
-            fetchedDrafts = sheetData.activeDrafts;
-            fetchedEnacted = sheetData.enactedRegulations || [];
-            setIsFetchedFromSheet(true);
-            console.log("Data successfully synchronized directly from Google Sheet!");
-          }
-        }
-      } catch (err) {
-        console.warn("Direct Google Sheet fetch failed or CORS pending, pulling from server cache...");
-      }
-
-      // 2. If Google Sheets fetch was unsuccessful or pending setup, fallback to server-side JSON
-      if (fetchedDrafts.length === 0) {
         const regsRes = await fetch('/api/regulations');
         if (regsRes.ok) {
           const regsData = await regsRes.json();
           fetchedDrafts = regsData.activeDrafts || [];
           fetchedEnacted = regsData.enactedRegulations || [];
-          setIsFetchedFromSheet(false);
+          setIsFetchedFromSheet(fetchedDrafts.length > 0);
         }
+      } catch (err) {
+        console.warn("Error fetching regulations:", err);
       }
 
-      // 3. Fetch submissions count for the 100 quota check
-      const subsRes = await fetch('/api/submissions');
-      if (subsRes.ok) {
-        const subsData = await subsRes.json();
-        fetchedCount = subsData.count;
-        setTotalCount(subsData.count);
+      // 2. Fetch submissions count for the 100 quota check
+      try {
+        const subsRes = await fetch('/api/submissions');
+        if (subsRes.ok) {
+          const subsData = await subsRes.json();
+          fetchedCount = subsData.count;
+          setTotalCount(subsData.count);
+        }
+      } catch (err) {
+        console.warn("Error fetching submissions:", err);
       }
 
       setActiveDrafts(fetchedDrafts);
@@ -321,7 +311,7 @@ export default function App() {
           <div className="bg-slate-800 border border-slate-700 p-3 rounded-lg flex-shrink-0 text-xs space-y-1 relative z-10 w-full md:w-auto">
             <div className="flex justify-between md:justify-start gap-4">
               <span className="text-slate-400">Sheet ID:</span>
-              <span className="font-mono text-emerald-400 text-[10px]">1Zt-Y0hW5c_M7f...</span>
+              <span className="font-mono text-emerald-400 text-[10px]">1CHwIRAvR7M3...</span>
             </div>
             <div className="flex justify-between md:justify-start gap-4">
               <span className="text-slate-400">Sinkronisasi:</span>
@@ -370,7 +360,16 @@ export default function App() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
-                      {activeDrafts.map((draft) => {
+                      {activeDrafts.length === 0 ? (
+                        <tr>
+                          <td colSpan={4} className="py-8 px-4 text-center text-slate-400">
+                            <FileText className="h-8 w-8 mx-auto text-slate-300 mb-2" />
+                            <p className="font-semibold text-slate-600 text-xs">Belum ada draf yang dipublikasikan</p>
+                            <p className="text-[11px] text-slate-400 mt-0.5">Draf peraturan yang telah disetujui 'Publik' oleh Admin akan otomatis muncul di sini.</p>
+                          </td>
+                        </tr>
+                      ) : (
+                        activeDrafts.map((draft) => {
                         const isSelected = selectedDraft?.id === draft.id;
                         return (
                           <tr 
@@ -410,7 +409,7 @@ export default function App() {
                             </td>
                           </tr>
                         );
-                      })}
+                      }))}
                     </tbody>
                   </table>
                 </div>

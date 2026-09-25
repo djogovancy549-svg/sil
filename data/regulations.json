@@ -1,4 +1,23 @@
 {
-  "activeDrafts": [],
+  "activeDrafts": [
+    {
+      "id": "draft_1790312422675",
+      "no": "sdsadas",
+      "title": "asdasd",
+      "desc": "sadasdasd",
+      "category": "asdasd",
+      "drivePdfUrl": "https://drive.google.com/file/d/1gf4GfsSvHY8LSXcQ311wcdqX_zMmL45Z/view?usp=sharing",
+      "status": "Uji Publik Aktif"
+    },
+    {
+      "id": "draft_1790313388836_447",
+      "no": "Draf Peraturan",
+      "title": "🌐SIM-PKBG -Rekap dan rincian Kluster 2",
+      "desc": "Draf peraturan yang diunggah ke Google Drive.",
+      "category": "Umum",
+      "drivePdfUrl": "https://drive.google.com/file/d/1gf4GfsSvHY8LSXcQ311wcdqX_zMmL45Z/view?usp=drivesdk",
+      "status": "Uji Publik Aktif"
+    }
+  ],
   "enactedRegulations": []
 }
