@@ -118,9 +118,15 @@ async function startServer() {
     try {
       const data = await fs.readFile(SUBMISSIONS_FILE, 'utf-8');
       const submissions = JSON.parse(data);
+      const configData = await fs.readFile(CONFIG_FILE, 'utf-8');
+      const config = JSON.parse(configData);
+      const maxQuota = config.maxQuota || 100;
+      const sessionName = config.sessionName || "Sesi Uji Publik";
+
       res.json({
         count: submissions.length,
-        quota: 100,
+        quota: maxQuota,
+        sessionName: sessionName,
         submissions: submissions.map((sub: any) => ({
           id: sub.id,
           timestamp: sub.timestamp,
