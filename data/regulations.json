@@ -1,21 +1,21 @@
 {
   "activeDrafts": [
     {
-      "id": "draft_1790312422675",
-      "no": "sdsadas",
-      "title": "asdasd",
-      "desc": "sadasdasd",
-      "category": "asdasd",
-      "drivePdfUrl": "https://drive.google.com/file/d/1gf4GfsSvHY8LSXcQ311wcdqX_zMmL45Z/view?usp=sharing",
+      "id": "draft_1790314914099_268",
+      "no": "Draf Peraturan",
+      "title": "QR sisekar",
+      "desc": "Draf rancangan peraturan dari folder Google Drive.",
+      "category": "Umum",
+      "drivePdfUrl": "https://drive.google.com/file/d/11ouggD5YHX8Cp04MLAeZWrRQXH6GpiTU/view?usp=drivesdk",
       "status": "Uji Publik Aktif"
     },
     {
-      "id": "draft_1790313388836_447",
+      "id": "draft_1790314914227_421",
       "no": "Draf Peraturan",
       "title": "🌐SIM-PKBG -Rekap dan rincian Kluster 2",
-      "desc": "Draf peraturan yang diunggah ke Google Drive.",
+      "desc": "Draf rancangan peraturan dari folder Google Drive.",
       "category": "Umum",
-      "drivePdfUrl": "https://drive.google.com/file/d/1gf4GfsSvHY8LSXcQ311wcdqX_zMmL45Z/view?usp=drivesdk",
+      "drivePdfUrl": "https://drive.google.com/file/d/1Co1zdPIhe82DHkNyuXjGtSFGvFMLSeSp/view?usp=drivesdk",
       "status": "Uji Publik Aktif"
     }
   ],
