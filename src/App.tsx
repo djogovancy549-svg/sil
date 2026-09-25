@@ -364,7 +364,7 @@ export default function App() {
                 </span>
               </div>
               <h1 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight leading-tight mt-0.5">
-                Portal Transparansi & Uji Publik Peraturan NKRI
+                Portal Transparansi & Uji Publik Peraturan Daerah Kab. Nagekeo
               </h1>
             </div>
           </div>
