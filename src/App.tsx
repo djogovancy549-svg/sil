@@ -291,18 +291,10 @@ export default function App() {
             </div>
           </div>
 
-          {/* Direct Embedded Spreadsheet link */}
-          <div className="flex items-center space-x-2.5">
-            <a 
-              href={GOOGLE_SHEET_URL}
-              target="_blank" 
-              rel="noreferrer"
-              className="inline-flex items-center space-x-1.5 py-1.5 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg border border-emerald-200 text-xs font-bold shadow-3xs transition-all"
-            >
-              <FileSpreadsheet className="h-4 w-4 text-emerald-600" />
-              <span>Buka Google Sheet</span>
-              <ExternalLink className="h-3 w-3 text-emerald-600" />
-            </a>
+          {/* Status Badge */}
+          <div className="flex items-center space-x-1.5 bg-emerald-50 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg border border-emerald-100 text-[10px] sm:text-xs font-bold text-emerald-800 shadow-3xs">
+            <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Formulir Terbuka</span>
           </div>
         </div>
       </header>
