@@ -69,38 +69,61 @@ export default function App() {
   const [formSuccess, setFormSuccess] = useState<string | null>(null);
   const [isFetchedFromSheet, setIsFetchedFromSheet] = useState<boolean>(false);
 
-  // Fetch regulations from Google Sheets Webhook or fallback to Server JSON
+  // Fetch regulations from Google Sheets Webhook or server endpoint
   const fetchData = async () => {
     try {
       setLoading(true);
       
       let fetchedDrafts: ActiveDraft[] = [];
       let fetchedEnacted: EnactedRegulation[] = [];
-      let fetchedCount = 0;
 
-      // 1. Fetch live regulations from server endpoint (which proxies Apps Script without CORS)
+      // 1. Coba ambil langsung dari Google Apps Script Webhook (Untuk Hosting Cloudflare Pages)
       try {
-        const regsRes = await fetch('/api/regulations');
-        if (regsRes.ok) {
-          const regsData = await regsRes.json();
-          fetchedDrafts = regsData.activeDrafts || [];
-          fetchedEnacted = regsData.enactedRegulations || [];
-          setIsFetchedFromSheet(fetchedDrafts.length > 0);
+        const scriptRes = await fetch(`${GOOGLE_APPS_SCRIPT_URL}?api=true`, {
+          method: 'GET',
+          redirect: 'follow',
+        });
+        if (scriptRes.ok) {
+          const scriptData = await scriptRes.json();
+          if (scriptData.activeDrafts && scriptData.activeDrafts.length > 0) {
+            fetchedDrafts = scriptData.activeDrafts;
+            fetchedEnacted = scriptData.enactedRegulations || [];
+            setIsFetchedFromSheet(true);
+          }
         }
-      } catch (err) {
-        console.warn("Error fetching regulations:", err);
+      } catch (scriptErr) {
+        console.warn("Direct Apps Script fetch failed (CORS or network), checking fallback server API...");
       }
 
-      // 2. Fetch submissions count for the 100 quota check
+      // 2. Jika di Cloudflare gagal karena CORS atau saat dev lokal, gunakan server API
+      if (fetchedDrafts.length === 0) {
+        try {
+          const regsRes = await fetch('/api/regulations');
+          if (regsRes.ok) {
+            const regsData = await regsRes.json();
+            fetchedDrafts = regsData.activeDrafts || [];
+            fetchedEnacted = regsData.enactedRegulations || [];
+            setIsFetchedFromSheet(fetchedDrafts.length > 0);
+          }
+        } catch (err) {
+          console.warn("Error fetching regulations from /api:", err);
+        }
+      }
+
+      // 3. Hitung Kuota Pengirim (Bisa dari server atau local storage jika di Cloudflare)
       try {
         const subsRes = await fetch('/api/submissions');
         if (subsRes.ok) {
           const subsData = await subsRes.json();
-          fetchedCount = subsData.count;
           setTotalCount(subsData.count);
+        } else {
+          // Fallback kuota untuk Cloudflare Pages murni
+          const localCount = parseInt(localStorage.getItem('ujipublik_submission_count') || '0', 10);
+          setTotalCount(localCount);
         }
       } catch (err) {
-        console.warn("Error fetching submissions:", err);
+        const localCount = parseInt(localStorage.getItem('ujipublik_submission_count') || '0', 10);
+        setTotalCount(localCount);
       }
 
       setActiveDrafts(fetchedDrafts);
@@ -192,18 +215,65 @@ export default function App() {
 
     setSubmitting(true);
     try {
-      const response = await fetch('/api/submissions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      let submissionSuccess = false;
+      let successMessage = "Kritik dan aspirasi Anda berhasil tersimpan dalam uji publik!";
 
-      const result = await response.json();
+      // 1. Coba kirim via server lokal/proxy terlebih dahulu
+      try {
+        const response = await fetch('/api/submissions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
 
-      if (response.ok) {
-        setFormSuccess(result.message);
+        if (response.ok) {
+          const result = await response.json();
+          successMessage = result.message || successMessage;
+          submissionSuccess = true;
+        }
+      } catch (proxyErr) {
+        console.warn("Backend proxy submission failed, trying direct Google Apps Script for Cloudflare...");
+      }
+
+      // 2. Jika di Cloudflare Pages (tanpa server backend), kirim langsung ke Webhook Google Apps Script
+      if (!submissionSuccess && GOOGLE_APPS_SCRIPT_URL) {
+        try {
+          const directPayload = {
+            id: `sub_${Date.now()}_${Math.random().toString(36).substr(2, 7)}`,
+            timestamp: new Date().toISOString(),
+            nama: formData.isAnonymous ? "Masyarakat Anonim" : formData.nama,
+            isAnonymous: formData.isAnonymous ? "Ya" : "Tidak",
+            profesi: formData.profesi,
+            instansi: formData.isAnonymous ? "" : (formData.instansi || ""),
+            email: formData.email || "",
+            noHp: formData.noHp || "",
+            keahlian: formData.keahlian || "Umum",
+            pasal: formData.pasal,
+            kritik: formData.kritik,
+            rekomendasi: formData.rekomendasi
+          };
+
+          // Menggunakan fetch direct dengan mode text / no-cors agar lolos di Cloudflare tanpa terblokir browser
+          await fetch(GOOGLE_APPS_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(directPayload)
+          });
+
+          // Catat kuota lokal di browser
+          const curr = parseInt(localStorage.getItem('ujipublik_submission_count') || '0', 10);
+          localStorage.setItem('ujipublik_submission_count', (curr + 1).toString());
+          setTotalCount(curr + 1);
+
+          submissionSuccess = true;
+        } catch (directErr) {
+          console.error("Direct Apps Script submission error:", directErr);
+        }
+      }
+
+      if (submissionSuccess) {
+        setFormSuccess(successMessage);
         
         // Reset form inputs (preserve current topic)
         setFormData(prev => ({
@@ -222,11 +292,11 @@ export default function App() {
         fetchData();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        setFormError(result.error || "Gagal mengirimkan kritik. Silakan coba lagi.");
+        setFormError("Gagal mengirimkan kritik. Silakan periksa koneksi internet Anda.");
       }
     } catch (err) {
       console.error("Submit error:", err);
-      setFormError("Terjadi gangguan koneksi ke server. Kritik Anda belum tersimpan.");
+      setFormError("Terjadi gangguan koneksi. Kritik Anda belum tersimpan.");
     } finally {
       setSubmitting(false);
     }
