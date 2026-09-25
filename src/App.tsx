@@ -11,7 +11,11 @@ import {
   ExternalLink,
   History,
   FileSpreadsheet,
-  BookOpen
+  BookOpen,
+  BarChart3,
+  TrendingUp,
+  PieChart,
+  ShieldCheck
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import bgWatermark from './assets/images/legal_green_watermark_1790310008588.jpg';
@@ -393,6 +397,109 @@ export default function App() {
             </div>
           </div>
         </div>
+
+        {/* STATISTIK & GRAFIK PARTISIPASI PUBLIK */}
+        {!loading && (
+          <div className="space-y-4">
+            {/* 4 Key Performance Metrics Cards */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+              <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-3xs hover:border-indigo-300 transition-all">
+                <div className="flex items-center justify-between text-slate-500 mb-2">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider">Draf Uji Publik</span>
+                  <div className="p-1.5 bg-indigo-50 text-indigo-600 rounded-lg">
+                    <FileText className="h-4 w-4" />
+                  </div>
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-slate-900">{activeDrafts.length}</div>
+                <div className="text-[10px] text-emerald-600 font-semibold mt-1 flex items-center">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 inline-block mr-1" />
+                  Terbuka untuk Dikritisi
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-3xs hover:border-sky-300 transition-all">
+                <div className="flex items-center justify-between text-slate-500 mb-2">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider">UU Pembanding</span>
+                  <div className="p-1.5 bg-sky-50 text-sky-600 rounded-lg">
+                    <History className="h-4 w-4" />
+                  </div>
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-slate-900">{enactedRegulations.length}</div>
+                <div className="text-[10px] text-slate-500 font-medium mt-1">Dasar Acuan Konstitusi</div>
+              </div>
+
+              <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-3xs hover:border-emerald-300 transition-all">
+                <div className="flex items-center justify-between text-slate-500 mb-2">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider">Kritik Masuk</span>
+                  <div className="p-1.5 bg-emerald-50 text-emerald-600 rounded-lg">
+                    <Users className="h-4 w-4" />
+                  </div>
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-slate-900">{totalCount} <span className="text-xs text-slate-400 font-normal">/ 100</span></div>
+                <div className="text-[10px] text-indigo-600 font-semibold mt-1 flex items-center">
+                  <TrendingUp className="h-3 w-3 mr-0.5" />
+                  Tercatat Real-time
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-3xs hover:border-amber-300 transition-all">
+                <div className="flex items-center justify-between text-slate-500 mb-2">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider">Sisa Kuota Uji</span>
+                  <div className="p-1.5 bg-amber-50 text-amber-600 rounded-lg">
+                    <ShieldCheck className="h-4 w-4" />
+                  </div>
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-slate-900">{Math.max(0, 100 - totalCount)}</div>
+                <div className="text-[10px] text-amber-600 font-semibold mt-1">Slot Publik Tersedia</div>
+              </div>
+            </div>
+
+            {/* VISUAL GRAFIK PARTISIPASI & PROGRESS BAR */}
+            <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-3xs grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+              
+              {/* Progress Bar Kuota Masukan */}
+              <div className="md:col-span-7 space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-extrabold text-slate-900 flex items-center">
+                    <BarChart3 className="h-4 w-4 mr-1.5 text-indigo-600" />
+                    Tingkat Keterisian Kuota Partisipasi Publik
+                  </span>
+                  <span className="font-black text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded text-[11px]">
+                    {Math.min(100, Math.round((totalCount / 100) * 100))}% Terisi
+                  </span>
+                </div>
+                
+                {/* Visual Multi-Segment Progress Bar */}
+                <div className="h-3.5 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200 flex">
+                  <div 
+                    className="h-full bg-gradient-to-r from-emerald-500 via-sky-500 to-indigo-600 rounded-full transition-all duration-700 relative shadow-inner"
+                    style={{ width: `${Math.min(100, Math.max(4, totalCount))}%` }}
+                  />
+                </div>
+
+                <div className="flex justify-between items-center text-[10px] text-slate-400 pt-0.5">
+                  <span>0 Aspirasi</span>
+                  <span>50 Target Paruh</span>
+                  <span>100 Kuota Batas</span>
+                </div>
+              </div>
+
+              {/* Status Validitas & Keamanan Data */}
+              <div className="md:col-span-5 bg-slate-50 rounded-xl p-3.5 border border-slate-100 flex items-center space-x-3.5">
+                <div className="p-2.5 bg-white text-emerald-600 rounded-xl border border-slate-200 shadow-3xs flex-shrink-0">
+                  <PieChart className="h-5 w-5" />
+                </div>
+                <div className="text-xs">
+                  <div className="font-bold text-slate-900">Uji Publik Akuntabel</div>
+                  <p className="text-[11px] text-slate-500 mt-0.5 leading-snug">
+                    Setiap kritik diverifikasi dan diarsipkan ke lembar Google Sheet resmi untuk rekapitulasi naskah akademik.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        )}
 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 bg-white rounded-2xl border border-slate-200 shadow-3xs">
