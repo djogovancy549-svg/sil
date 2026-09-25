@@ -33,7 +33,7 @@ async function ensureDataFiles() {
       drivePdfUrl: "",
       googleSheetUrl: "https://docs.google.com/spreadsheets/d/1CHwIRAvR7M3Sd3TdxgPYBYsdhUUqdGvFs_MzOVaMt3s/edit?usp=sharing",
       googleSheetEmbedUrl: "",
-      googleSheetAppsScriptUrl: "https://script.google.com/macros/s/AKfycbxHWzTDkK3OqwB0nCeTcffGlMNbbqiMeGKq7x57OXD6KzDeUFTMo52XVm95Zs43Rxu_pg/exec",
+      googleSheetAppsScriptUrl: "https://script.google.com/macros/s/AKfycbzwpRA1kZDkW5GjcLCA8bCX6kjQxsN_kO5ideipNTKirtNkINisI2bXoeoyjjS299vrlQ/exec",
       adminPasscode: "publik2026"
     };
     await fs.writeFile(CONFIG_FILE, JSON.stringify(defaultConfig, null, 2), 'utf-8');
