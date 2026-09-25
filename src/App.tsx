@@ -14,6 +14,7 @@ import {
   BookOpen
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import bgWatermark from './assets/images/legal_green_watermark_1790310008588.jpg';
 
 // Hardcoded Google Sheet & Webhook Apps Script URLs embedded directly into the coding
 const GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1Zt-Y0hW5c_M7fA3mG6V4rS0gHw2eP0_C3G2U-E7R6u4/edit?usp=sharing";
@@ -254,7 +255,15 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans antialiased flex flex-col">
+    <div 
+      className="min-h-screen text-slate-800 font-sans antialiased flex flex-col relative"
+      style={{ 
+        backgroundImage: `linear-gradient(rgba(248, 250, 252, 0.95), rgba(248, 250, 252, 0.95)), url(${bgWatermark})`,
+        backgroundSize: '360px',
+        backgroundRepeat: 'repeat',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       {/* Decorative Gradient Accent Line */}
       <div className="h-1.5 bg-gradient-to-r from-indigo-700 via-sky-500 to-emerald-500 w-full" />
 
