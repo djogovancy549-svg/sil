@@ -31,7 +31,7 @@ async function ensureDataFiles() {
       regulationTitle: "Sistem Informasi Legislatif & Uji Publik Nasional",
       regulationDesc: "Pusat partisipasi masyarakat untuk memberikan kritik, saran, dan draf redaksi alternatif terhadap rancangan peraturan aktif.",
       drivePdfUrl: "",
-      googleSheetUrl: "https://docs.google.com/spreadsheets/d/1Zt-Y0hW5c_M7fA3mG6V4rS0gHw2eP0_C3G2U-E7R6u4/edit?usp=sharing",
+      googleSheetUrl: "https://docs.google.com/spreadsheets/d/1CHwIRAvR7M3Sd3TdxgPYBYsdhUUqdGvFs_MzOVaMt3s/edit?usp=sharing",
       googleSheetEmbedUrl: "",
       googleSheetAppsScriptUrl: "https://script.google.com/macros/s/AKfycbw2qQD6Z4UK2B2gwol_xqZrxZ6TxPnErE5Z5dRCWCRhchbrfejH7ng7bTNCt7P_F1RPxg/exec",
       adminPasscode: "publik2026"
