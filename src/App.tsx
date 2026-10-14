@@ -617,11 +617,11 @@ export default function App() {
                   <div className="flex items-center space-x-2">
                     <History className="h-5 w-5 text-slate-600" />
                     <h3 className="font-extrabold text-xs sm:text-sm text-slate-900">
-                      2. Regulasi & UU Referensi (Sudah Berlaku)
+                      2.PERDA yang Sudah Berlaku 
                     </h3>
                   </div>
                   <p className="text-[10px] sm:text-xs text-slate-500 mt-1 leading-relaxed">
-                    Daftar undang-undang pembanding sah di Indonesia untuk membantu Anda menyusun naskah perbandingan hukum yang berlandaskan konstitusi.
+                    Daftar PERDA yang telah disahkan dan berlaku efektif.
                   </p>
                 </div>
 
@@ -641,8 +641,8 @@ export default function App() {
                         <tr>
                           <td colSpan={5} className="py-8 px-4 text-center text-slate-400">
                             <History className="h-7 w-7 mx-auto text-slate-300 mb-2" />
-                            <p className="font-semibold text-slate-600 text-xs">Belum ada daftar undang-undang referensi di Sheet</p>
-                            <p className="text-[11px] text-slate-400 mt-0.5">Tambahkan baris pada tab sheet 'Peraturan Berlaku' untuk menampilkan undang-undang acuan di sini.</p>
+                            <p className="font-semibold text-slate-600 text-xs">Belum ada daftar PERDA referensi di Sheet</p>
+                            <p className="text-[11px] text-slate-400 mt-0.5">Tambahkan baris pada tab sheet 'Peraturan Berlaku' untuk menampilkan PERDA acuan di sini.</p>
                           </td>
                         </tr>
                       ) : (
