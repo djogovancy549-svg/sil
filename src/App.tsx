@@ -357,15 +357,15 @@ export default function App() {
             <div>
               <div className="flex items-center justify-center sm:justify-start space-x-2">
                 <span className="text-[9px] sm:text-[10px] font-bold tracking-wider text-indigo-700 uppercase bg-indigo-50 px-1.5 sm:px-2 py-0.5 rounded-xs">
-                  Sistem Informasi Legislatif
+                  SIPERDA-PEMDA NAGEKEO
                 </span>
                 <span className="text-[9px] sm:text-[10px] font-bold tracking-wider text-emerald-700 uppercase bg-emerald-50 px-1.5 sm:px-2 py-0.5 rounded-xs animate-pulse">
                   {isFetchedFromSheet ? "Live Google Sheet" : "Database Terpadu"}
                 </span>
               </div>
-              <h1 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight leading-tight mt-0.5">
-                Portal Transparansi & Uji Publik Peraturan Daerah Kab. Nagekeo
-              </h1>
+              <marquee><h1 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight leading-tight mt-0.5">
+                Sistem Informasi Rancangan Peraturan Daerah - Pemerintah Kabupaten Nagekeo
+              </h1></marquee>
             </div>
           </div>
 
