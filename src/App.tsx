@@ -363,9 +363,9 @@ export default function App() {
                   {isFetchedFromSheet ? "Live Google Sheet" : "Database Terpadu"}
                 </span>
               </div>
-              <marquee><h1 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight leading-tight mt-0.5">
-                Sistem Informasi Rancangan Peraturan Daerah - Pemerintah Kabupaten Nagekeo - Sekretariat Daerah - Bagian Hukum - Kompleks Civic Center - Jln. Soekarno - Hatta
-              </h1></marquee>
+              <marquee><h3 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight leading-tight mt-0.5">
+                Sistem Informasi Rancangan Peraturan Daerah - Pemerintah Kabupaten Nagekeo - Sekretariat Daerah - Bagian Hukum - Kompleks Civic Center - Jln. Moh. Hatta
+              </h3></marquee>
             </div>
           </div>
 
