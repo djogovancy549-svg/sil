@@ -364,7 +364,7 @@ export default function App() {
                 </span>
               </div>
               <marquee><h1 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight leading-tight mt-0.5">
-                Sistem Informasi Rancangan Peraturan Daerah - Pemerintah Kabupaten Nagekeo
+                Sistem Informasi Rancangan Peraturan Daerah - Pemerintah Kabupaten Nagekeo - Sekretariat Daerah - Bagian Hukum - Kompleks Civic Center - Jln. Soekarno - Hatta
               </h1></marquee>
             </div>
           </div>
