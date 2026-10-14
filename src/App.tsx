@@ -551,7 +551,7 @@ export default function App() {
                       <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider text-[9px] sm:text-[10px]">
                         <th className="py-3 px-4">No / Kode</th>
                         <th className="py-3 px-4">Judul Rancangan Regulasi</th>
-                        <th className="py-3 px-4">Bidang</th>
+                        <th className="py-3 px-4">Pemrakarsa</th>
                         <th className="py-3 px-4 text-center">Aksi</th>
                       </tr>
                     </thead>
