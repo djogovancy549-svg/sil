@@ -357,14 +357,14 @@ export default function App() {
             <div>
               <div className="flex items-center justify-center sm:justify-start space-x-2">
                 <span className="text-[9px] sm:text-[10px] font-bold tracking-wider text-indigo-700 uppercase bg-indigo-50 px-1.5 sm:px-2 py-0.5 rounded-xs">
-                  Sistem Informasi Legislatif
+                  Sistem Informasi Rancangan Peraturan Daerah
                 </span>
                 <span className="text-[9px] sm:text-[10px] font-bold tracking-wider text-emerald-700 uppercase bg-emerald-50 px-1.5 sm:px-2 py-0.5 rounded-xs animate-pulse">
                   {isFetchedFromSheet ? "Live Google Sheet" : "Database Terpadu"}
                 </span>
               </div>
               <h1 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight leading-tight mt-0.5">
-                Portal Transparansi & Uji Publik Peraturan NKRI
+                Portal Transparansi & Uji Publik Rancangan PERDA Kabupaten Nagekeo
               </h1>
             </div>
           </div>
@@ -617,11 +617,11 @@ export default function App() {
                   <div className="flex items-center space-x-2">
                     <History className="h-5 w-5 text-slate-600" />
                     <h3 className="font-extrabold text-xs sm:text-sm text-slate-900">
-                      2. Regulasi & UU Referensi (Sudah Berlaku)
+                      2. Regulasi & PERDA (Sudah Berlaku)
                     </h3>
                   </div>
                   <p className="text-[10px] sm:text-xs text-slate-500 mt-1 leading-relaxed">
-                    Daftar undang-undang pembanding sah di Indonesia untuk membantu Anda menyusun naskah perbandingan hukum yang berlandaskan konstitusi.
+                    Daftar PERDA yang sudah berlaku sah di Kabupaten Negakeo.
                   </p>
                 </div>
 
@@ -641,7 +641,7 @@ export default function App() {
                         <tr>
                           <td colSpan={5} className="py-8 px-4 text-center text-slate-400">
                             <History className="h-7 w-7 mx-auto text-slate-300 mb-2" />
-                            <p className="font-semibold text-slate-600 text-xs">Belum ada daftar undang-undang referensi di Sheet</p>
+                            <p className="font-semibold text-slate-600 text-xs">Belum ada daftar PERDA referensi di Sheet</p>
                             <p className="text-[11px] text-slate-400 mt-0.5">Tambahkan baris pada tab sheet 'Peraturan Berlaku' untuk menampilkan undang-undang acuan di sini.</p>
                           </td>
                         </tr>
