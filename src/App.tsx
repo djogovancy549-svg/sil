@@ -22,7 +22,7 @@ import bgWatermark from './assets/images/legal_green_watermark_1790310008588.jpg
 
 // Hardcoded Google Sheet & Webhook Apps Script URLs embedded directly into the coding
 const GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1CHwIRAvR7M3Sd3TdxgPYBYsdhUUqdGvFs_MzOVaMt3s/edit?usp=sharing";
-const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxgYG8M_lTwtB1ucZ9sa-6Y5XUqmwPmTK1bT19rECQViQSf793fnfI390FwwcJpPK2_gQ/exec";
+const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZOivTRlr-cnrsLo18i_A8rKzINywqdVaGoTWp1AQwVyGxx2tLnulaHRw7mjIuT2Qw7Q/exec";
 
 interface ActiveDraft {
   id: string;
@@ -52,7 +52,7 @@ export default function App() {
   const [maxQuota, setMaxQuota] = useState<number>(100);
   const [sessionName, setSessionName] = useState<string>("Sesi Uji Publik 1");
   const [loading, setLoading] = useState<boolean>(true);
-  const [submitting, setSubmitting] = useState<boolean>(false);mband
+  const [submitting, setSubmitting] = useState<boolean>(false);
   
   // Selected draft row details
   const [selectedDraft, setSelectedDraft] = useState<ActiveDraft | null>(null);
@@ -357,15 +357,15 @@ export default function App() {
             <div>
               <div className="flex items-center justify-center sm:justify-start space-x-2">
                 <span className="text-[9px] sm:text-[10px] font-bold tracking-wider text-indigo-700 uppercase bg-indigo-50 px-1.5 sm:px-2 py-0.5 rounded-xs">
-                  SIPERDA-PEMDA NAGEKEO
+                  Sistem Informasi Legislatif
                 </span>
                 <span className="text-[9px] sm:text-[10px] font-bold tracking-wider text-emerald-700 uppercase bg-emerald-50 px-1.5 sm:px-2 py-0.5 rounded-xs animate-pulse">
                   {isFetchedFromSheet ? "Live Google Sheet" : "Database Terpadu"}
                 </span>
               </div>
-              <marquee><h3 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight leading-tight mt-0.5">
-                Sistem Informasi Rancangan Peraturan Daerah - Pemerintah Kabupaten Nagekeo - Sekretariat Daerah - Bagian Hukum - Kompleks Civic Center - Jln. Soekarno - Hatta
-              </h3></marquee>
+              <h1 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight leading-tight mt-0.5">
+                Portal Transparansi & Uji Publik Peraturan NKRI
+              </h1>
             </div>
           </div>
 
@@ -437,7 +437,7 @@ export default function App() {
 
               <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-3xs hover:border-sky-300 transition-all">
                 <div className="flex items-center justify-between text-slate-500 mb-2">
-                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider">UU PEMBANDING</span>
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider">UU Pembanding</span>
                   <div className="p-1.5 bg-sky-50 text-sky-600 rounded-lg">
                     <History className="h-4 w-4" />
                   </div>
@@ -551,7 +551,7 @@ export default function App() {
                       <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider text-[9px] sm:text-[10px]">
                         <th className="py-3 px-4">No / Kode</th>
                         <th className="py-3 px-4">Judul Rancangan Regulasi</th>
-                        <th className="py-3 px-4">Pemrakarsa</th>
+                        <th className="py-3 px-4">Bidang</th>
                         <th className="py-3 px-4 text-center">Aksi</th>
                       </tr>
                     </thead>
@@ -617,11 +617,11 @@ export default function App() {
                   <div className="flex items-center space-x-2">
                     <History className="h-5 w-5 text-slate-600" />
                     <h3 className="font-extrabold text-xs sm:text-sm text-slate-900">
-                      2.PERDA yang Sudah Berlaku 
+                      2. Regulasi & UU Referensi (Sudah Berlaku)
                     </h3>
                   </div>
                   <p className="text-[10px] sm:text-xs text-slate-500 mt-1 leading-relaxed">
-                    Daftar PERDA yang telah disahkan dan berlaku efektif.
+                    Daftar undang-undang pembanding sah di Indonesia untuk membantu Anda menyusun naskah perbandingan hukum yang berlandaskan konstitusi.
                   </p>
                 </div>
 
@@ -641,8 +641,8 @@ export default function App() {
                         <tr>
                           <td colSpan={5} className="py-8 px-4 text-center text-slate-400">
                             <History className="h-7 w-7 mx-auto text-slate-300 mb-2" />
-                            <p className="font-semibold text-slate-600 text-xs">Belum ada daftar PERDA referensi di Sheet</p>
-                            <p className="text-[11px] text-slate-400 mt-0.5">Tambahkan baris pada tab sheet 'Peraturan Berlaku' untuk menampilkan PERDA acuan di sini.</p>
+                            <p className="font-semibold text-slate-600 text-xs">Belum ada daftar undang-undang referensi di Sheet</p>
+                            <p className="text-[11px] text-slate-400 mt-0.5">Tambahkan baris pada tab sheet 'Peraturan Berlaku' untuk menampilkan undang-undang acuan di sini.</p>
                           </td>
                         </tr>
                       ) : (
