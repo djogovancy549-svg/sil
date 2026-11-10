@@ -443,7 +443,7 @@ export default function App() {
                   </div>
                 </div>
                 <div className="text-xl sm:text-2xl font-black text-slate-900">{enactedRegulations.length}</div>
-                <div className="text-[10px] text-slate-500 font-medium mt-1">Dasar Acuan Konstitusi</div>
+                <div className="text-[10px] text-slate-500 font-medium mt-1">Jumlah PERDA Berlaku</div>
               </div>
 
               <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-3xs hover:border-emerald-300 transition-all">
