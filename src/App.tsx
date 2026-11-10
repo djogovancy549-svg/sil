@@ -52,7 +52,7 @@ export default function App() {
   const [maxQuota, setMaxQuota] = useState<number>(100);
   const [sessionName, setSessionName] = useState<string>("Sesi Uji Publik 1");
   const [loading, setLoading] = useState<boolean>(true);
-  const [submitting, setSubmitting] = useState<boolean>(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);mband
   
   // Selected draft row details
   const [selectedDraft, setSelectedDraft] = useState<ActiveDraft | null>(null);
@@ -437,7 +437,7 @@ export default function App() {
 
               <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-3xs hover:border-sky-300 transition-all">
                 <div className="flex items-center justify-between text-slate-500 mb-2">
-                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider">UU Pembanding</span>
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider">PERDA BERLAKU</span>
                   <div className="p-1.5 bg-sky-50 text-sky-600 rounded-lg">
                     <History className="h-4 w-4" />
                   </div>
